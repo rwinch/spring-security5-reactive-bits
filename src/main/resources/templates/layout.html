@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">SecureMail</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.css}" href="../static/css/bootstrap.css" rel="stylesheet"></link>
+    <style type="text/css">
+        body {
+            padding-top: 5rem;
+        }
+        .starter-template {
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+
+<body>
+
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" th:href="@{/inbox}">Inbox</a>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li th:if="${currentUser} == null">
+                <a class="nav-link" th:href="@{/signup}">Sign Up</a>
+            </li>
+            <li class="dropdown" th:if="${currentUser} != null">
+                <a href="#"
+                   class="dropdown-toggle nav-link"
+                   data-toggle="dropdown"
+                   role="button"
+                   aria-haspopup="true"
+                   aria-expanded="false"
+                   th:text="${currentUser.name}">Dropdown <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <form th:action="@{/logout}" th:method="post">
+                            <button class="btn btn-link" type="submit">Log out</button>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container" layout:fragment="content">
+
+    <div class="starter-template">
+        <h1>Bootstrap starter template</h1>
+        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+    </div>
+
+</div><!-- /.container -->
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.js}"></script>
+</body>
+</html>
