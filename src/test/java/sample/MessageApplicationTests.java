@@ -25,11 +25,21 @@ public class MessageApplicationTests {
 	}
 
 	@Test
-	@WithMockUser
-	public void usersWhenUserThenOk() {
+	@WithMockCustomUser
+	public void usersWhenUserThenForbidden() {
+		this.client.get()
+				.uri("/users")
+				.exchange()
+				.expectStatus().isForbidden();
+	}
+
+	@Test
+	@WithMockCustomUser("rob@example.com")
+	public void usersWhenRobThenOk() {
 		this.client.get()
 				.uri("/users")
 				.exchange()
 				.expectStatus().isOk();
 	}
+
 }
