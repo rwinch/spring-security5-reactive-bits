@@ -34,7 +34,7 @@ public class MessageApplicationTests {
 	}
 
 	@Test
-	@WithMockCustomUser("rob@example.com")
+	@WithRob
 	public void usersWhenRobThenOk() {
 		this.client.get()
 				.uri("/users")
