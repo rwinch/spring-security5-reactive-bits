@@ -1,13 +1,13 @@
 package sample.security;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.web.reactive.result.view.CsrfRequestDataValueProcessor;
 import org.springframework.security.web.server.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-
-import java.security.Principal;
+import sample.user.User;
 
 /**
  * @author Rob Winch
@@ -23,7 +23,7 @@ public class SecurityControllerAdvice {
 	}
 
 	@ModelAttribute("currentUser")
-	Mono<Principal> currentUser(Mono<Principal> principal) {
-		return principal;
+	User currentUser(@AuthenticationPrincipal User currentUser) {
+		return currentUser;
 	}
 }
