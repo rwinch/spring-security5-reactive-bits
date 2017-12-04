@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.security.Principal;
+
 /**
  * @author Rob Winch
  * @since 5.0
@@ -18,5 +20,10 @@ public class SecurityControllerAdvice {
 		Mono<CsrfToken> csrfToken = exchange.getAttribute(CsrfToken.class.getName());
 		return csrfToken.doOnSuccess(token -> exchange.getAttributes()
 				.put(CsrfRequestDataValueProcessor.DEFAULT_CSRF_ATTR_NAME, token));
+	}
+
+	@ModelAttribute("currentUser")
+	Mono<Principal> currentUser(Mono<Principal> principal) {
+		return principal;
 	}
 }
